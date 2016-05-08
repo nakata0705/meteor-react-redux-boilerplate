@@ -1,6 +1,13 @@
 import React from 'react';
-import classnames from 'classnames';
 import TodoEdit from 'dir_src/components/TodoEdit';
+
+import {ListItem} from 'material-ui/List';
+import Checkbox from 'material-ui/Checkbox';
+import {grey400} from 'material-ui/styles/colors';
+import IconMenu from 'material-ui/IconMenu';
+import MenuItem from 'material-ui/MenuItem';
+import IconButton from 'material-ui/IconButton';
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 
 export default class TodoItem extends React.Component {
   static propTypes = {
@@ -17,7 +24,7 @@ export default class TodoItem extends React.Component {
     };
   }
 
-  handleDoubleClick() {
+  handleStartEdit() {
     this.setState({ editing: true });
   }
 
@@ -32,32 +39,38 @@ export default class TodoItem extends React.Component {
 
   render() {
     const {todo, completeTodo, deleteTodo} = this.props;
+    const iconButtonElement = (
+      <IconButton
+        touch={true}
+        tooltip="more"
+        tooltipPosition="bottom-left">
+        <MoreVertIcon color={grey400} />
+      </IconButton>
+    );
+    const rightIconMenu = (
+      <IconMenu iconButtonElement={iconButtonElement}>
+        <MenuItem onClick={() => this.handleStartEdit()}>Edit</MenuItem>
+        <MenuItem onClick={() => deleteTodo(todo._id)}>Delete</MenuItem>
+      </IconMenu>
+    );
 
     return (
-      <li className={classnames({
-        TodoItem: true,
-        completed: todo.completed,
-        editing: this.state.editing,
-      })}>
-        {this.state.editing ?
+      <ListItem
+        leftCheckbox={<Checkbox checked={todo.completed} onCheck={() => completeTodo(todo._id)} />}
+        rightIconButton={rightIconMenu}
+        primaryText={this.state.editing ?
           <TodoEdit
             text={todo.text}
             editing={this.state.editing}
             onSave={(text) => this.handleSave(todo._id, text)} /> :
-          <div className='view'>
-            <input
-              className='toggle'
-              type='checkbox'
-              checked={todo.completed}
-              onChange={() => completeTodo(todo._id)} />
-            <label onDoubleClick={this.handleDoubleClick}>
-              {todo.text}
-            </label>
-            <button
-              className='destroy'
-              onClick={() => deleteTodo(todo._id)}>x</button>
+          <div className='view' onClick={() => deleteTodo(todo._id)}>
+            {todo.text}
           </div>}
-      </li>
+      />
     );
   }
 }
+/*             <button
+              className='destroy'
+              onClick={() => deleteTodo(todo._id)}>x</button>
+*/

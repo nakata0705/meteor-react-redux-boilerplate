@@ -1,6 +1,8 @@
 import React from 'react';
 import classnames from 'classnames';
 
+import TextField from 'material-ui/TextField';
+
 export default class TodoEdit extends React.Component {
   static propTypes = {
     onSave: React.PropTypes.func.isRequired,
@@ -38,13 +40,13 @@ export default class TodoEdit extends React.Component {
 
   render() {
     return (
-      <input
+      <TextField
         className={classnames({
           'edit': this.props.editing,
           'new-todo': this.props.newTodo,
         })}
         type='text'
-        placeholder="Add Todo"
+        hintText="Add Todo"
         autoFocus='true'
         value={this.state.text}
         onBlur={::this.handleBlur}
