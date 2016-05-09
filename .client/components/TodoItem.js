@@ -47,23 +47,20 @@ export default class TodoItem extends React.Component {
         <MoreVertIcon color={grey400} />
       </IconButton>
     );
-    const rightIconMenu = (
-      <IconMenu iconButtonElement={iconButtonElement}>
-        <MenuItem onClick={() => this.handleStartEdit()}>Edit</MenuItem>
-        <MenuItem onClick={() => deleteTodo(todo._id)}>Delete</MenuItem>
-      </IconMenu>
-    );
 
     return (
       <ListItem
         leftCheckbox={<Checkbox checked={todo.completed} onCheck={() => completeTodo(todo._id)} />}
-        rightIconButton={rightIconMenu}
+        rightIconButton={<IconMenu iconButtonElement={iconButtonElement}>
+          <MenuItem onClick={() => this.handleStartEdit()}>Edit</MenuItem>
+          <MenuItem onClick={() => deleteTodo(todo._id)}>Delete</MenuItem>
+        </IconMenu>}
         primaryText={this.state.editing ?
           <TodoEdit
             text={todo.text}
             editing={this.state.editing}
             onSave={(text) => this.handleSave(todo._id, text)} /> :
-          <div className='view' onClick={() => deleteTodo(todo._id)}>
+          <div className='view'>
             {todo.text}
           </div>}
       />
