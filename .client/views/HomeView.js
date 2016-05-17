@@ -14,8 +14,6 @@ import TodoAdd from 'dir_src/components/TodoAdd';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-import AppBar from 'material-ui/AppBar';
-
 const actionCreators = {
   ...TodoAction,
 };
@@ -51,12 +49,10 @@ export class HomeView extends React.Component {
     return (
       <MuiThemeProvider muiTheme={getMuiTheme()}>
         <div className='HomeView'>
-          <AppBar title="Title" iconClassNameRight="muidocs-icon-navigation-expand-more" />
-          <TodoAdd addTodo={this.props.actions.addTodo} />
           <TodoApp
             todos={this.data.todos}
             actions={this.props.actions} />
-          {JSON.stringify(this.data.todos)}
+          <TodoAdd addTodo={this.props.actions.addTodo} />
         </div>
       </MuiThemeProvider>
     );
@@ -65,3 +61,6 @@ export class HomeView extends React.Component {
 
 const HomeViewWithMixin = reactMixin.decorate(ReactMeteorData)(HomeView);
 export default connect(mapStateToProps, mapDispatchToProps)(HomeViewWithMixin);
+
+// {JSON.stringify(this.data.todos)}
+

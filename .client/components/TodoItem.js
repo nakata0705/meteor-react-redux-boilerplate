@@ -40,7 +40,7 @@ export default class TodoItem extends React.Component {
   render() {
     const {todo, completeTodo, deleteTodo} = this.props;
     const iconButtonElement = (
-      <IconButton
+      <IconButton>
         touch={true}
         tooltip="more"
         tooltipPosition="bottom-left">

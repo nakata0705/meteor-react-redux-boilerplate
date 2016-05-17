@@ -2,6 +2,8 @@ import React from 'react';
 import classnames from 'classnames';
 
 import TextField from 'material-ui/TextField';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentSend from 'material-ui/svg-icons/content/send';
 
 export default class TodoEdit extends React.Component {
   static propTypes = {
@@ -39,19 +41,27 @@ export default class TodoEdit extends React.Component {
   }
 
   render() {
+    const style = {
+      marginRight: 20,
+    };
     return (
-      <TextField
-        className={classnames({
-          'edit': this.props.editing,
-          'new-todo': this.props.newTodo,
-        })}
-        type='text'
-        hintText="Add Todo"
-        autoFocus='true'
-        value={this.state.text}
-        onBlur={::this.handleBlur}
-        onChange={::this.handleChange}
-        onKeyDown={::this.handleSubmit} />
+      <div>
+        <TextField
+          className={classnames({
+            'edit': this.props.editing,
+            'new-todo': this.props.newTodo,
+          })}
+          type='text'
+          hintText="Add Todo"
+          autoFocus='true'
+          value={this.state.text}
+          onBlur={::this.handleBlur}
+          onChange={::this.handleChange}
+          onKeyDown={::this.handleSubmit} />
+        <FloatingActionButton mini={true} style={style}>
+          <ContentSend />
+        </FloatingActionButton>
+      </div>
     );
   }
 }
