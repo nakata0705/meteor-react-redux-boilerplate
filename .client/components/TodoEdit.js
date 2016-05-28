@@ -59,7 +59,7 @@ export default class TodoEdit extends React.Component {
           onChange={::this.handleChange}
           onKeyDown={::this.handleSubmit} />
         <FloatingActionButton mini={true} style={style}>
-          <ContentSend />
+          <ContentSend onClick={::this.handleSubmit}/>
         </FloatingActionButton>
       </div>
     );
