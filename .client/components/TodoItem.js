@@ -20,6 +20,7 @@ export default class TodoItem extends React.Component {
     todo: React.PropTypes.object.isRequired,
     // editTodo: React.PropTypes.func.isRequired,
     // deleteTodo: React.PropTypes.func.isRequired,
+    startTodo: React.PropTypes.func.isRequired,
     completeTodo: React.PropTypes.func.isRequired,
   }
 
@@ -43,19 +44,15 @@ export default class TodoItem extends React.Component {
     this.setState({ editing: false });
   }
   render() {
-    const {todo, completeTodo} = this.props;
-    let display = 'block';
-    if (todo.completed === true) {
-      display = 'none';
-    }
+    const {todo, completeTodo, startTodo} = this.props;
     return (
-      <Card style={{display: display}}>
+      <Card>
         <CardText>
           {todo.text + todo._id}
         </CardText>
         <CardActions>
           <FlatButton icon={<StopIcon />} />
-          <FlatButton icon={<PlayArrowIcon />} />
+          <FlatButton icon={<PlayArrowIcon />} onClick={() => startTodo(todo._id)} />
           <FlatButton icon={<DoneIcon />} onClick={() => completeTodo(todo._id)}/>
         </CardActions>
       </Card>

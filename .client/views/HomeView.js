@@ -41,7 +41,9 @@ export class HomeView extends React.Component {
 
   getMeteorData() {
     return {
-      todos: Todos.find({}).fetch(),
+      todos: Todos.find({started: false, completed: false}).fetch(),
+      startedTodos: Todos.find({started: true, completed: false}).fetch(),
+      completedTodos: Todos.find({completed: true}).fetch(),
     };
   }
 
@@ -51,6 +53,8 @@ export class HomeView extends React.Component {
         <div className='HomeView'>
           <TodoApp
             todos={this.data.todos}
+            startedTodos={this.data.startedTodos}
+            completedTodos={this.data.completedTodos}
             actions={this.props.actions} />
           <TodoAdd addTodo={this.props.actions.addTodo} />
         </div>

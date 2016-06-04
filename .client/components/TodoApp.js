@@ -7,6 +7,8 @@ import {Tabs, Tab} from 'material-ui/Tabs';
 export default class TodoApp extends React.Component {
   static propTypes = {
     todos: React.PropTypes.array.isRequired,
+    startedTodos: React.PropTypes.array.isRequired,
+    completedTodos: React.PropTypes.array.isRequired,
     actions: React.PropTypes.object.isRequired,
   }
 
@@ -15,7 +17,7 @@ export default class TodoApp extends React.Component {
   }
 
   render() {
-    const { todos, actions } = this.props;
+    const { todos, startedTodos, completedTodos, actions } = this.props;
     const style = { overflow: 'scroll', height: '80vh' };
     return (
       <Tabs>
@@ -28,14 +30,14 @@ export default class TodoApp extends React.Component {
         </Tab>
         <Tab label="Doing" >
           <div className='TodoApp' style={style}>
-            {todos.map(todo =>
+            {startedTodos.map(todo =>
               <TodoItem key={todo._id} todo={todo} {...actions} />
             )}
           </div>
         </Tab>
         <Tab label="Done">
           <div className='TodoApp'style={style}>
-            {todos.map(todo =>
+            {completedTodos.map(todo =>
               <TodoItem key={todo._id} todo={todo} {...actions} />
             )}
           </div>

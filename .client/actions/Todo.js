@@ -2,6 +2,7 @@ import {
   ADD_TODO,
   DELETE_TODO,
   EDIT_TODO,
+  START_TODO,
   COMPLETE_TODO,
 } from 'dir_src/constants';
 
@@ -24,6 +25,13 @@ export function editTodo(id, text) {
     type: EDIT_TODO,
     id,
     text,
+  };
+}
+
+export function startTodo(id) {
+  return {
+    type: START_TODO,
+    id,
   };
 }
 
